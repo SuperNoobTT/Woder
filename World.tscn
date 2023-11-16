@@ -1,0 +1,189 @@
+[gd_scene load_steps=9 format=3 uid="uid://o0ghqlftdnq7"]
+
+[ext_resource type="PackedScene" uid="uid://jsc2ec1mrcw6" path="res://Player/Player.tscn" id="1_4hx1i"]
+[ext_resource type="Texture2D" uid="uid://2vswrv28s25v" path="res://World/Ground.png" id="2_881kf"]
+[ext_resource type="Texture2D" uid="uid://dw2cea1cxygxs" path="res://World/Sunset sky.png" id="3_odwnq"]
+
+[sub_resource type="GDScript" id="GDScript_0avom"]
+script/source = "extends Node2D
+
+var waveEnemy: Wave_Enemy
+var wave: int = 1
+var enemy_pos = Vector2(256, 2100)
+
+func _ready():
+	waveEnemy = Wave_Enemy.new(wave, 100)
+	add_child(waveEnemy)
+	waveEnemy.global_position = enemy_pos
+	waveEnemy.visible = true
+	waveEnemy.dead.connect(dead)
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+
+func dead():
+	if waveEnemy.dead:
+		wave+= 1
+		waveEnemy = Wave_Enemy.new(wave, 100)
+		add_child(waveEnemy)
+		waveEnemy.position = enemy_pos
+
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gxc3k"]
+size = Vector2(1224, 141.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qf3rp"]
+size = Vector2(2480, 40.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wflrb"]
+size = Vector2(649.972, 73)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bs534"]
+size = Vector2(636.762, 63.0132)
+
+[node name="World" type="Node2D"]
+script = SubResource("GDScript_0avom")
+
+[node name="Player" parent="." instance=ExtResource("1_4hx1i")]
+top_level = true
+visibility_layer = 513
+position = Vector2(284, 225)
+
+[node name="Boundary" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D(bot)" type="CollisionShape2D" parent="Boundary"]
+position = Vector2(585, 579.25)
+scale = Vector2(5, 1)
+shape = SubResource("RectangleShape2D_gxc3k")
+debug_color = Color(0.105882, 0.490196, 0.407843, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Boundary/CollisionShape2D(bot)"]
+show_behind_parent = true
+visibility_layer = 2
+position = Vector2(100, 2767.75)
+scale = Vector2(2, 10)
+texture = ExtResource("2_881kf")
+offset = Vector2(-3, -286.75)
+
+[node name="CollisionShape2D(top)" type="CollisionShape2D" parent="Boundary"]
+position = Vector2(902, -28.25)
+shape = SubResource("RectangleShape2D_qf3rp")
+
+[node name="CollisionShape2D(left)" type="CollisionShape2D" parent="Boundary"]
+position = Vector2(-47, 330)
+rotation = 1.56941
+shape = SubResource("RectangleShape2D_wflrb")
+one_way_collision = true
+one_way_collision_margin = 10.0
+
+[node name="CollisionShape2D(right)" type="CollisionShape2D" parent="Boundary"]
+position = Vector2(1931, 307)
+rotation = 4.71239
+shape = SubResource("RectangleShape2D_bs534")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scale = Vector2(1, 1.0198)
+transform = Transform2D(1, 0, -0.2, 1, 0, 0)
+scroll_offset = Vector2(300, 300)
+
+[node name="PlayerBackground" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_offset = Vector2(20, 20)
+
+[node name="Background(wow)" type="Sprite2D" parent="ParallaxBackground/PlayerBackground"]
+modulate = Color(1, 1, 1, 0.603922)
+show_behind_parent = true
+position = Vector2(-326.6, -348)
+texture = ExtResource("3_odwnq")
+
+[node name="Background(wow)2" type="Sprite2D" parent="ParallaxBackground/PlayerBackground"]
+modulate = Color(1, 1, 1, 0.603922)
+show_behind_parent = true
+position = Vector2(697.4, -348)
+texture = ExtResource("3_odwnq")
+
+[node name="Background(wow)3" type="Sprite2D" parent="ParallaxBackground/PlayerBackground"]
+modulate = Color(1, 1, 1, 0.603922)
+show_behind_parent = true
+position = Vector2(-327, 164)
+texture = ExtResource("3_odwnq")
+
+[node name="Background(wow)4" type="Sprite2D" parent="ParallaxBackground/PlayerBackground"]
+modulate = Color(1, 1, 1, 0.603922)
+show_behind_parent = true
+position = Vector2(697, 164)
+texture = ExtResource("3_odwnq")
+
+[node name="Background(wow)5" type="Sprite2D" parent="ParallaxBackground/PlayerBackground"]
+modulate = Color(1, 1, 1, 0.603922)
+show_behind_parent = true
+position = Vector2(1721.4, -348)
+texture = ExtResource("3_odwnq")
+
+[node name="Background(wow)6" type="Sprite2D" parent="ParallaxBackground/PlayerBackground"]
+modulate = Color(1, 1, 1, 0.603922)
+show_behind_parent = true
+position = Vector2(2745.4, -348)
+texture = ExtResource("3_odwnq")
+
+[node name="Background(wow)7" type="Sprite2D" parent="ParallaxBackground/PlayerBackground"]
+modulate = Color(1, 1, 1, 0.603922)
+show_behind_parent = true
+position = Vector2(1721, 164)
+texture = ExtResource("3_odwnq")
+
+[node name="Background(wow)8" type="Sprite2D" parent="ParallaxBackground/PlayerBackground"]
+modulate = Color(1, 1, 1, 0.603922)
+show_behind_parent = true
+position = Vector2(2745, 164)
+texture = ExtResource("3_odwnq")
+
+[node name="Background(wow)9" type="Sprite2D" parent="ParallaxBackground/PlayerBackground"]
+modulate = Color(1, 1, 1, 0.603922)
+show_behind_parent = true
+position = Vector2(-326, 675)
+texture = ExtResource("3_odwnq")
+
+[node name="Background(wow)10" type="Sprite2D" parent="ParallaxBackground/PlayerBackground"]
+modulate = Color(1, 1, 1, 0.603922)
+show_behind_parent = true
+position = Vector2(698, 675)
+texture = ExtResource("3_odwnq")
+
+[node name="Background(wow)11" type="Sprite2D" parent="ParallaxBackground/PlayerBackground"]
+modulate = Color(1, 1, 1, 0.603922)
+show_behind_parent = true
+position = Vector2(-326.4, 1187)
+texture = ExtResource("3_odwnq")
+
+[node name="Background(wow)12" type="Sprite2D" parent="ParallaxBackground/PlayerBackground"]
+modulate = Color(1, 1, 1, 0.603922)
+show_behind_parent = true
+position = Vector2(697.6, 1187)
+texture = ExtResource("3_odwnq")
+
+[node name="Background(wow)13" type="Sprite2D" parent="ParallaxBackground/PlayerBackground"]
+modulate = Color(1, 1, 1, 0.603922)
+show_behind_parent = true
+position = Vector2(1722, 675)
+texture = ExtResource("3_odwnq")
+
+[node name="Background(wow)14" type="Sprite2D" parent="ParallaxBackground/PlayerBackground"]
+modulate = Color(1, 1, 1, 0.603922)
+show_behind_parent = true
+position = Vector2(2746, 675)
+texture = ExtResource("3_odwnq")
+
+[node name="Background(wow)15" type="Sprite2D" parent="ParallaxBackground/PlayerBackground"]
+modulate = Color(1, 1, 1, 0.603922)
+show_behind_parent = true
+position = Vector2(1721.6, 1187)
+texture = ExtResource("3_odwnq")
+
+[node name="Background(wow)16" type="Sprite2D" parent="ParallaxBackground/PlayerBackground"]
+modulate = Color(1, 1, 1, 0.603922)
+show_behind_parent = true
+position = Vector2(2745.6, 1187)
+texture = ExtResource("3_odwnq")

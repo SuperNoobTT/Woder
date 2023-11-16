@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://bx20a8yojdj3f"]
+
+[ext_resource type="Script" path="res://Enemies/Wave_Enemy/Wave_Enemy.gd" id="1_rn5vx"]
+[ext_resource type="Texture2D" uid="uid://dntkw3sn0ca3s" path="res://Enemies/Wave_Enemy/Tsunami(a)(1).png" id="2_rr522"]
+
+[sub_resource type="Gradient" id="Gradient_7b37f"]
+offsets = PackedFloat32Array(0, 0, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2b0ta"]
+gradient = SubResource("Gradient_7b37f")
+fill_from = Vector2(1, 0)
+fill_to = Vector2(0, 0)
+metadata/_snap_enabled = true
+
+[node name="WaveEnemy" type="RigidBody2D"]
+position = Vector2(675, 96)
+collision_layer = 32768
+script = ExtResource("1_rn5vx")
+
+[node name="Tsunami" type="Sprite2D" parent="."]
+position = Vector2(842, 215)
+scale = Vector2(4.004, 6)
+texture = ExtResource("2_rr522")
+
+[node name="HpBar(WIP)" type="TextureProgressBar" parent="."]
+offset_left = 2300.2
+offset_top = -1.19995
+offset_right = 2364.2
+offset_bottom = 62.8
+texture_progress = SubResource("GradientTexture2D_2b0ta")
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+top_level = true
+position = Vector2(1403, -122)
+scale = Vector2(2, 2)
+build_mode = 1
+polygon = PackedVector2Array(726, -67, 716, 934, -483, 928, -483, 751, -371, 784, -289, 700, -128, 693, -62, 519, -351, 431, -367, 248, -266, 155, -232, -72)
